@@ -1,0 +1,13 @@
+page-inventory {
+  ion-card-header {
+    background-color:#7e7e7e;
+  }
+  .item-ios p, ion-md p {
+    overflow: inherit;
+    font-size: 1.25rem;
+    line-height: normal;
+    text-overflow: inherit;
+    color: #424242;
+    margin: 0 0 2px;
+  }
+}

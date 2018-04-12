@@ -1,5 +1,41 @@
 // http://ionicframework.com/docs/theming/
+.custom {
+  background-color: #19bbc0 !important;
+  /* This sets the background color*/
+}
+.nav-title {
+  font: white;
+}
 
+ion-header {
+  $SIDEMENU_LEFT: #19bbc0;
+  $SIDEMENU_RIGHT: #0071b7;
+  .toolbar-background-ios,
+  .toolbar-background-md {
+    background: linear-gradient(90deg, $SIDEMENU_LEFT 0%, $SIDEMENU_RIGHT 100%);
+  }
+  .toolbar-title-ios,
+  .toolbar-title-md {
+    text-align: left;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: white;
+    pointer-events: auto;
+  }
+}
+hr {
+  border-top: 1px solid #ccc;
+  text-align: center;
+  margin-left: 20px;
+  width: 90%;
+}
+.center {
+  text-align: center;
+}
+div {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 // App Global Sass
 // --------------------------------------------------
