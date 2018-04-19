@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { DataServiceProvider } from "../../providers/data-service/data-service";
 
 // import { DataServiceProvider } from '../../providers/data-service/data-service';
 /**
@@ -12,24 +13,44 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 @Component({
-  selector: 'page-register',
-  templateUrl: 'register.html',
+  selector: "page-register",
+  templateUrl: "register.html"
 })
 export class RegisterPage {
+  barcode_id = "";
+  item = "";
+  price = "";
+  description = "";
 
-  barcode : any;
-  item = '';
-  price = '';
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private barcodeScanner: BarcodeScanner,
+    public dataServiceProvider: DataServiceProvider
+  ) {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner) {}
-     
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    console.log("ionViewDidLoad RegisterPage");
   }
-  scan(){
-    this.barcodeScanner.scan().then(barcodeData => {
-      console.log(barcodeData.text);
-      this.barcode = barcodeData.text;
-    }).catch(err => console.log(err));
+  scan() {
+    this.barcodeScanner
+      .scan()
+      .then((barcodeData) => {
+        console.log(barcodeData.text);
+        this.barcode_id = barcodeData.text;
+      })
+      .catch(err => console.log(err));
   }
+  add() {
+      let _data = {
+        barcode_id: this.barcode_id,
+        description: this.description,
+        price: this.price,
+        name: this.item
+      };
+      console.log(_data);
+      this.dataServiceProvider.AddProduct(_data).subscribe(data => {
+       console.log(data);
+      });
+    };
 }

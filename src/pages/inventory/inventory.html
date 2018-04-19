@@ -14,91 +14,29 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding >
 
-  <ion-card>
+  <ion-card *ngFor="let result of results" >
     <ion-card-header style="color: white; padding-bottom: 3%; padding-top: 3%;">
-      Today
-    </ion-card-header>
+      {{result.formatted_date}} <!-- {{ result.date }} -->
+    </ion-card-header>  
 
-    <ion-list>
-      <button ion-item (click)="gotoInventoryProduct()">
+    <ion-list *ngFor="let _item of result.items">
+      <button ion-item (click)="getItem(_item._id)">
         <ion-row>
           <ion-col col-7 style="margin-top: 3px;">
-            <p style="font-weight: bold;">Potato Chips</p>
-            <p>01-22-2018 | 01:36 PM </p>
+            <p style="font-weight: bold;">{{_item.product.item_name}}</p>
+            <p>{{_item.createdAt | date: 'longDate'}} | {{_item.updatedAt | date: 'shortTime'}}</p>
           </ion-col>
           <ion-col>
-            <p style="font-weight: bold;">52897456321</p>
+            <p style="font-weight: bold;">{{_item.product.barcode_id}}</p>
             <p style="font-weight: bold;">QTY:
-              <span style="font-weight: normal; "> 25</span>
+              <span style="font-weight: normal; ">{{_item.qty}}</span>
             </p>
           </ion-col>
         </ion-row>
       </button>
     </ion-list>
+
   </ion-card>
-  <ion-card>
-    <ion-card-header style="color: white; padding-bottom: 3%; padding-top: 3%;">
-      Yesterday
-    </ion-card-header>
-    <ion-list>
-        <button ion-item (click)="gotoInventoryProduct()">
-        <ion-row>
-          <ion-col col-7 style="margin-top: 3px;">
-            <p style="font-weight: bold;">C2</p>
-            <p>01-19-2018 | 10:17 AM </p>
-          </ion-col>
-          <ion-col>
-            <p style="font-weight: bold;">BARCODE ID</p>
-            <p style="font-weight: bold;">QTY:
-              <span style="font-weight: normal;"> 25</span>
-            </p>
-          </ion-col>
-        </ion-row>
-      </button>
-    </ion-list>
-  </ion-card>
-  <ion-card>
-      <ion-card-header style="color: white; padding-bottom: 3%; padding-top: 3%;">
-        2 Days Ago
-      </ion-card-header>  
-      <ion-list>
-          <button ion-item (click)="gotoInventoryProduct()">
-          <ion-row>
-            <ion-col col-7 style="margin-top: 3px;">
-              <p style="font-weight: bold;">C2</p>
-              <p>01-19-2018 | 10:17 AM </p>
-            </ion-col>
-            <ion-col>
-              <p style="font-weight: bold;">BARCODE ID</p>
-              <p style="font-weight: bold;">QTY:
-                <span style="font-weight: normal;"> 25</span>
-              </p>
-            </ion-col>
-          </ion-row>
-        </button>
-      </ion-list>
-    </ion-card>
-    <ion-card>
-        <ion-card-header style="color: white; padding-bottom: 3%; padding-top: 3%;">
-          3 Days Ago
-        </ion-card-header>  
-        <ion-list>
-            <button ion-item (click)="gotoInventoryProduct()">
-            <ion-row>
-              <ion-col col-7 style="margin-top: 3px;">
-                <p style="font-weight: bold;">C2</p>
-                <p>01-19-2018 | 10:17 AM </p>
-              </ion-col>
-              <ion-col>
-                <p style="font-weight: bold;">BARCODE ID</p>
-                <p style="font-weight: bold;">QTY:
-                  <span style="font-weight: normal;"> 25</span>
-                </p>
-              </ion-col>
-            </ion-row>           
-          </button>
-        </ion-list>
-      </ion-card>
 </ion-content>

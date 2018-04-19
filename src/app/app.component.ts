@@ -22,8 +22,7 @@ export class MyApp {
     this.pages = [
       { title: 'Add Inventory', icon: "assets/svg/AddInventory-icon.svg", component: 'HomePage' },
       { title: 'Inventories', icon: "assets/svg/Invetory_icon.svg", component: 'InventoryPage' },
-      { title: 'Register Item', icon: "assets/svg/RegisterItem_icon.svg", component: 'RegisterPage' },
-      
+      { title: 'Register Item', icon: "assets/svg/RegisterItem_icon.svg", component: 'RegisterPage' }
     ]
   }
 

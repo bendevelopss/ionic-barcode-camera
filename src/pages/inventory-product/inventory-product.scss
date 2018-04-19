@@ -5,4 +5,76 @@ page-inventory-product {
     color: white;
     background-color: transparent;
   }
+  div {
+    display: inline-block;
+    margin-left: auto;
+  }
+  .lbl {
+    color: rgba(49, 49, 49, 0.993);
+    font-weight: bolder;
+    margin-left: 5px;
+  }
+  .lbl2 {
+    color: rgba(80, 82, 76, 0.918);
+    margin-left: 5px;
+  }
+  .lbl-comment {
+    color: rgba(49, 49, 49, 0.993);
+    font-weight: bolder;
+    margin-left: 5px;
+    text-indent: 7px;
+  }
+  .icon-prompt {
+    color: teal;
+    font-weight: bolder;
+    font-size: 18pt;
+  }
+  .lbl-photos {
+    color: rgba(49, 49, 49, 0.993);
+    font-weight: bolder;
+    margin-left: 5px;
+    margin-top: 10px; 
+    text-indent: 7px;
+  }
+  .lbl-id {
+    text-align: center;
+    color: rgba(49, 49, 49, 0.993);
+    font-weight: bolder;
+  }
+  .lbl-barcode {
+    text-align: center;
+    color: #19bbc0;
+    font-weight: bolder;
+    font-size: 16pt;
+  }
+  .btn-cam {
+    width: 90px;
+    height: 85px;
+    margin-left: 6px;
+    margin-bottom: 10px;
+    padding-top: -10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-cam {
+    font-size: 50pt;
+    color: darkgrey;
+    font-weight: bolder;
+    transform: translate(-5%, -20%);
+  }
+  .img {
+    width: 120px;
+    height: 80px;
+    background: #e0e0e0;
+  }
+  .btn-img {
+    width: 100px;
+    height: 80px;
+    background: transparent;
+  }
+  .imgs {
+    margin-bottom: 3px;
+    margin-left: 3px;
+  }
 }

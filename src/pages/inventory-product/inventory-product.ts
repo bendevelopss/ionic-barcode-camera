@@ -1,7 +1,10 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, ModalController } from "ionic-angular";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 import { AlertController } from "ionic-angular";
+import { DatePipe } from "@angular/common";
+import { DataServiceProvider } from "../../providers/data-service/data-service";
+// import { ImageViewerController } from "ionic-img-viewer";
 /**
  * Generated class for the InventoryProductPage page.
  *
@@ -15,40 +18,76 @@ import { AlertController } from "ionic-angular";
   templateUrl: "inventory-product.html"
 })
 export class InventoryProductPage {
+  photo: any;
   options: any;
+  item: any;
+  photos = [];
+  loaded = false;
   comment: string;
+  index: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private camera: Camera,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public dataServiceProvider: DataServiceProvider,
+    public modalCtrl: ModalController
   ) {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    };
   }
-  cam() {
-    this.camera.getPicture(this.options).then(
-      imageData => {
-        // imageData is either a base64 encoded string or a file URI
-        // If it's base64:
-        let base64Image = "data:image/jpeg;base64," + imageData;
-      },
-      err => {
-        // Handle error
-      }
-    );
+
+
+  ionViewCanEnter() {
+    this.item = this.navParams.get("item");
+    console.log(this.item);
+    this.photos = this.item.photos;
+    this.loaded = true;
   }
-  presentPrompt() {
+
+  cam(_photo) {
+    this.camera
+      .getPicture({
+        destinationType: this.camera.DestinationType.DATA_URL,
+        mediaType: this.camera.MediaType.PICTURE,
+        quality: 100,
+        targetWidth: 1000,
+        targetHeight: 1000,
+        correctOrientation: true
+      })
+      .then(
+        imageData => {
+          // imageData is a base64 encoded string
+
+          this.photo = "data:image/jpeg;base64," + imageData;
+          let _photo = {
+            id: this.item._id,
+            photo: this.photo
+          };
+
+          this.photos.push({
+            path: this.photo
+          });
+
+          this.dataServiceProvider.addPhoto(_photo).subscribe(imageData => {
+            console.log("success");
+            // if(imageData.success){
+            //   console.log('photo success')
+            // }
+          });
+        },
+        err => {
+          console.log(err);
+        }
+      );
+  }
+
+  presentPrompt(_comment) {
     let alert = this.alertCtrl.create({
-      title: "Login",
+      title: "Add Comment",
       inputs: [
         {
-          name: this.comment,
-          placeholder: "Enter Comment"
+          name: "comment",
+          placeholder: "Enter Comment",
+          value: this.item.comment.msg
         }
       ],
       buttons: [
@@ -60,17 +99,33 @@ export class InventoryProductPage {
           }
         },
         {
-          text: "Add Comment",
+          text: "Comment",
+          role: "comment",
+
           handler: data => {
-             console.log(data);
+            let _data = {
+              id: this.item._id,
+              msg: data.comment,
+              Date: new Date()
+            };
+            this.dataServiceProvider.addComment(_data).subscribe(data => {
+              console.log(data);
+              if (data.success) {
+                this.item.comment.msg = data.result.comment.msg;
+                this.alertCtrl.create({
+                  message: "Success comment"
+                });
+              }
+            });
           }
         }
       ]
     });
     alert.present();
   }
-
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad InventoryProductPage");
+  previewImage(image) {
+   
+    this.modalCtrl.create('ModalPage', { img : image }).present();
+    
   }
 }

@@ -9,7 +9,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu" color="light"></ion-icon>
     </button>
-    <button style="float: right; background: transparent; height: 80%;" (click)="scan()">
+    <button class="btn-scan" (click)="scan()">
       <ion-icon name="qr-scanner" color="light"></ion-icon>
     </button>
     <ion-title color="light">Register Item</ion-title>
@@ -21,24 +21,24 @@
   <!-- <form #myForm="ngForm"> -->
     <ion-card>
       <ion-item>
-        <ion-input placeholder="Enter Barcode ID" clearInput  [(ngModel)]="barcode" disabled></ion-input>
+        <ion-input placeholder="Enter Barcode ID" clearInput name="barcode_id" [(ngModel)]="barcode_id" disabled></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Enter Item Name" name="item" clearInput [(ngModel)]="item" required></ion-input>
+        <ion-input placeholder="Enter Item Name" name="item" clearInput [(ngModel)]="item"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Price" name="price" clearInput [(ngModel)]="price"></ion-input>
+        <ion-input placeholder="Price" name="price" clearInput [(ngModel)]="price" type="number"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Description" clearInput></ion-input>
+        <ion-input placeholder="Description" [(ngModel)]="description" name="description" clearInput></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="" clearInput></ion-input>
+        <ion-input placeholder="" clearInput disabled></ion-input>
       </ion-item>
     </ion-card>
 
     <button ion-button round full color="grey" >Cancel</button>
-    <button ion-button round full color="side_left" type="button" [disabled]="item == '' || barcode == '' || price == ''">Submit</button>
+    <button ion-button round full color="side_left" type="button" [disabled]="item == '' || barcode_id == '' || price == ''" (click)="add()">Submit</button>
   <!-- </form> -->
 
 </ion-content>

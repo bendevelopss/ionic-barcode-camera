@@ -14,66 +14,72 @@
 
 
 <ion-content padding>
-  <ion-card>
+  <ion-card *ngIf="loaded">
     <ion-list>
       <ion-row>
         <ion-col>
-          <ion-label stacked style="text-align: center; color: rgba(49, 49, 49, 0.993); font-weight: bolder">Item ID</ion-label>
-          <ion-label style="text-align: center; color: #19bbc0; font-weight: bolder; font-size: 16pt;">5644545487</ion-label>
+          <ion-label stacked class="lbl-id">Item ID</ion-label>
+          <ion-label class="lbl-barcode"> {{item.product.barcode_id}} </ion-label>
           <hr>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-6>
-          <ion-label stacked style="color: rgba(49, 49, 49, 0.993); font-weight: bolder; margin-left: 5px;">Name</ion-label>
-          <ion-label stacked style="color: rgba(80, 82, 76, 0.918); margin-left: 5px;">Potato</ion-label>
+          <ion-label stacked class="lbl">Name</ion-label>
+          <ion-label stacked class="lbl2">{{item.product.item_name}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-label stacked style="color: rgba(49, 49, 49, 0.993); font-weight: bolder; margin-left: 5px;">Price</ion-label>
-          <ion-label stacked style="color: rgba(80, 82, 76, 0.918); margin-left: 5px;">P28.50</ion-label>
+          <ion-label stacked class="lbl">Price</ion-label>
+          <ion-label stacked class="lbl2">P{{item.product.price}}</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label stacked style="color: rgba(49, 49, 49, 0.993); font-weight: bolder; margin-left: 5px;">Unit</ion-label>
-          <ion-label stacked style="color: rgba(80, 82, 76, 0.918); margin-left: 5px;">Pouch</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-label stacked style="color: rgba(49, 49, 49, 0.993); font-weight: bolder; margin-left: 5px;">Quantity</ion-label>
-          <ion-label stacked style="color: rgba(80, 82, 76, 0.918); margin-left: 5px;">25</ion-label>
-        </ion-col>
-        <ion-col>
-          <ion-label stacked style="color: rgba(49, 49, 49, 0.993); font-weight: bolder; margin-left: 5px;">Date</ion-label>
-          <ion-label stacked style="color: rgba(80, 82, 76, 0.918); margin-left: 5px;">01-22-2018</ion-label>
+          <ion-label stacked class="lbl">Unit</ion-label>
+          <ion-label stacked class="lbl2">{{item.unit}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-label stacked style="color: rgba(49, 49, 49, 0.993); font-weight: bolder; margin-left: 5px;">Description</ion-label>
-          <ion-label stacked style="color: rgba(80, 82, 76, 0.918); margin-left: 5px;">Chilli Flavor Shots</ion-label>
+          <ion-label stacked class="lbl">Quantity</ion-label>
+          <ion-label stacked class="lbl2">{{item.qty}}</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label stacked class="lbl">Date</ion-label>
+          <ion-label stacked class="lbl2">{{item.updatedAt | date:'short'}}</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label stacked class="lbl">Description</ion-label>
+          <ion-label stacked class="lbl2">{{item.product.description}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-list>
   </ion-card>
 
   <ion-card style="padding-bottom: 60px;">
-    <ion-label stacked style="color: rgba(49, 49, 49, 0.993); font-weight: bolder; margin-left: 5px; text-indent: 7px;">Comments
+    <ion-label stacked class="lbl-comment">Comments
       <button style="float: right; background: transparent;">
-        <ion-icon name="ios-create-outline" style="color: teal; font-weight: bolder; font-size: 18pt;" (click)="presentPrompt()"></ion-icon>
+        <ion-icon name="ios-create-outline" class="icon-prompt" (click)="presentPrompt()"></ion-icon>
       </button>
     </ion-label>
-    <p style="margin-left: 10px;" value="(no comments available)">{{comment}}</p>
+    <p style="margin-left: 10px;" value="(no comments available)">{{item.comment.msg}}</p>
 
   </ion-card>
 
-  <ion-card style="padding-bottom: 20px;">
-    <ion-label stacked style="color: rgba(49, 49, 49, 0.993); font-weight: bolder; margin-left: 5px; text-indent: 7px;">Photos</ion-label>
-    <div>
-      <button style="width: 100px; height: 80px; margin-left: 10px;" (click)="cam()">
-        <ion-icon name="ios-add-circle-outline" style="font-size: 45pt; color: darkgrey; font-weight: bolder;"></ion-icon>
+  <ion-card style="padding-bottom: 20px; margin-top: 10px; margin-left: 15px;">
+    <ion-label stacked class="lbl-photos">Photos</ion-label>
+    <div class="imgs">
+      <button class="btn-cam" (click)="cam()">
+        <ion-icon name="ios-add-circle-outline" class="icon-cam" style="margin-top: 22px;"></ion-icon>
       </button>
     </div>
+    <div *ngFor="let photo of photos" class="imgs">
+      <button class="btn-img" (click)="previewImage(photo.path)">
+        <img [src]="photo.path" class="img">
+      </button>
+    </div>
+
   </ion-card>
 </ion-content>

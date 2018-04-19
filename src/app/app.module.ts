@@ -9,9 +9,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 
 import { Camera } from '@ionic-native/camera';
-import { BarcodeScanner } from "@ionic-native/barcode-scanner";
-import { Toast } from '@ionic-native/toast';
 import { DataServiceProvider } from '../providers/data-service/data-service';
+import { IonicImageViewerModule, ImageViewerController  } from 'ionic-img-viewer';
+import { FingerprintAIO } from "@ionic-native/fingerprint-aio/";
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
+    IonicImageViewerModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,10 +30,9 @@ import { DataServiceProvider } from '../providers/data-service/data-service';
   providers: [
     StatusBar,
     SplashScreen,
-    BarcodeScanner,
-    Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataServiceProvider
+    DataServiceProvider,
+    FingerprintAIO
     
   ]
 })

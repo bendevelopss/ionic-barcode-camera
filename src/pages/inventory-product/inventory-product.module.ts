@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { InventoryProductPage } from './inventory-product';
 import { Camera } from '@ionic-native/camera';
 
+
 @NgModule({
   declarations: [
     InventoryProductPage,
@@ -12,6 +13,7 @@ import { Camera } from '@ionic-native/camera';
   ],
   imports: [
     IonicPageModule.forChild(InventoryProductPage),
+    
   ],
 })
 export class InventoryProductPageModule {}
