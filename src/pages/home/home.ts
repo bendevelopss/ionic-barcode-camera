@@ -80,8 +80,6 @@ export class HomePage {
       image: ""
     };
 
-    // console.log(_data.product);
-
     let loader = this.loadingCtrl.create({
       content: "Loading",
       spinner: "ios"
@@ -92,7 +90,10 @@ export class HomePage {
     this.dataServiceProvider.addInventory(_data).subscribe(data => {
       loader.dismiss();
       let alert = this.alertCtrl.create({
-        message: data.success ? "Successful" : "Error"
+        title: data.success ? "Success" : "Notice",
+        message: data.success ? "Product Registered" : "Something went wrong",
+        buttons: ['Dismiss'],
+        // mode: 'ios'
       });
       if (data.success) this.clear();
       alert.present();

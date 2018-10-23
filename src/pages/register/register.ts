@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, AlertController } from "ionic-angular";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { DataServiceProvider } from "../../providers/data-service/data-service";
 
@@ -26,8 +26,9 @@ export class RegisterPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private barcodeScanner: BarcodeScanner,
-    public dataServiceProvider: DataServiceProvider
-  ) {}
+    public dataServiceProvider: DataServiceProvider,
+    public alertCtrl: AlertController
+  ) { }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad RegisterPage");
@@ -42,15 +43,28 @@ export class RegisterPage {
       .catch(err => console.log(err));
   }
   add() {
-      let _data = {
-        barcode_id: this.barcode_id,
-        description: this.description,
-        price: this.price,
-        name: this.item
-      };
-      console.log(_data);
-      this.dataServiceProvider.AddProduct(_data).subscribe(data => {
-       console.log(data);
-      });
+
+    let _data = {
+      barcode_id: this.barcode_id,
+      description: this.description,
+      price: this.price,
+      name: this.item
     };
+    console.log(_data);
+    this.dataServiceProvider.AddProduct(_data).subscribe(data => {
+      let alert = this.alertCtrl.create({
+        title: data.success ? 'Success' : 'Notice',
+        message: data.success ? 'Product Registered' : 'Something went wrong',
+        buttons: ['Dismiss'],
+        // mode: 'ios'
+      })
+      console.log(data);
+      if (data.success) this.clear()
+        alert.present()
+    });
+  }
+
+  clear() {
+    this.item = this.barcode_id = this.price = this.description = ""
+  }
 }

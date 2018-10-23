@@ -13,7 +13,7 @@ export class DataServiceProvider {
   products: any[] = [];
   selectedProduct: any;
   productFound:boolean = false;
-  
+
   // baseUrl = 'http://192.168.0.152:8080';
   baseUrl = 'https://inventory-control-app.herokuapp.com'
   constructor(public http: Http) {
@@ -27,7 +27,7 @@ export class DataServiceProvider {
     return this.http.get(this.baseUrl+'/inventory/item/'+id).map((response)=>response.json());
   }
   addComment(_data){
-    return this.http.post(this.baseUrl+'/inventory/add_comment/', _data ).map((response)=>response.json()); 
+    return this.http.post(this.baseUrl+'/inventory/add_comment/', _data ).map((response)=>response.json());
   }
   addPhoto(_photo){
    return this.http.post(this.baseUrl+'/inventory/add_photo/', _photo).map((response) => response.json());
